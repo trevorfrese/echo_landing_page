@@ -1,0 +1,161 @@
+<%= javascript_tag do %>
+function check_char_count(chars){
+  var len = $(chars).val().length
+  var max = 140;
+  if (len >= max) {
+    $('#characterLeft').text('You have hit the limit');
+  } else {
+    var ch = max - len;
+    $('#characterLeft').text(ch + ' characters left');
+  }
+}
+$( "#click_it" ).on( "click", function() {
+  $("#replies-list").slideToggle();
+});
+
+/* Google maps code */
+
+// This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
+
+
+function inititalizeMap() {
+  // Create the search box and link it to the UI element.
+  var input = document.getElementById('pac-input');
+  var searchBox = new google.maps.places.SearchBox(input);
+  var places = searchBox.getPlaces();
+  var marker;
+
+  var i = 0;
+  var lats = [];
+  var lngs = [];
+  var posts = [];
+
+<% Post.all.each do |post| %>
+  posts.push('<%= post.id %>');
+  lats.push('<%= post.lat %>');
+  lngs.push('<%= post.lng %>');
+<% end %>
+  var geocoder = new google.maps.Geocoder;
+
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 34.411640, lng: -119.860887},
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    panControl: true,
+    zoomControl: true,
+    mapTypeControl: true,
+    scaleControl: true,
+    streetViewControl: true,
+    overviewMapControl: true
+  });
+
+
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+  // Bias the SearchBox results towards current map's viewport.
+  map.addListener('bounds_changed', function() {
+
+    for(var i = 0; i < '<%= Post.all.count %>'; i++){
+      $('#post-'+posts[i]).hide();
+      console.log(map.getBounds().contains( new google.maps.LatLng(lats[i], lngs[i]) ));
+      if (map.getBounds().contains( new google.maps.LatLng(lats[i], lngs[i]) )){
+        $('#post-'+posts[i]).show();
+        placePreexistingMarker({ lat: parseFloat(lats[i]), lng: parseFloat(lngs[i]) });
+      }
+    }
+    searchBox.setBounds(map.getBounds());
+  });
+
+  google.maps.event.addListener(map, 'click', function(event) {
+    $('#post-form').show();
+    $('#lat_field').val(event.latLng.lat());
+    $('#lng_field').val(event.latLng.lng());
+    getAddress(event.latLng);
+    placeMarker(event.latLng);
+  });
+
+
+
+  var markers = [];
+  // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  searchBox.addListener('places_changed', function() {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+
+    // Clear out the old markers.
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    markers = [];
+
+    // For each place, get the icon, name and location.
+    var bounds = new google.maps.LatLngBounds();
+
+
+     places.forEach(function(place) {
+
+
+     // Create a marker for each place.
+     markers.push(new google.maps.Marker({
+       map: map,
+       title: place.name,
+       position: place.geometry.location,
+     }));
+
+     if (place.geometry.viewport) {
+       // Only geocodes have viewport.
+       bounds.union(place.geometry.viewport);
+       } else {
+       bounds.extend(place.geometry.location);
+       }
+     });
+
+    map.fitBounds(bounds);
+  });
+
+  function getAddress(latLng) {
+    geocoder.geocode( {'latLng': latLng},
+      function(results, status) {
+        if(status == google.maps.GeocoderStatus.OK) {
+          if(results[0]) {
+            document.getElementById("address").innerHTML = results[0].formatted_address;
+          }
+          else {
+            document.getElementById("address").innerHTML = "No results";
+          }
+        }
+        else {
+          document.getElementById("address").innerHTML = status;
+        }
+      });
+  }
+  function placePreexistingMarker(location) {
+    var marker = new google.maps.Marker({
+      position: location,
+      map: map
+    });
+  }
+  function placeMarker(location) {
+    if ( marker ) {
+      marker.setPosition(location);
+    } else {
+      marker = new google.maps.Marker({
+        position: location,
+        map: map
+      });
+    }
+  }
+
+
+}
+
+inititalizeMap();
+
+<% end %>

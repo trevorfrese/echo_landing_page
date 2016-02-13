@@ -1,0 +1,35 @@
+<script src="//maps.googleapis.com/maps/api/js?signed_in=true&libraries=places"></script>
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+<% @posts_with_no_parents = Post.all.select{ |post| post.parent_post_id == 0} %>
+<div id = "left_half">
+  <% if user_signed_in? %>
+    <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+  <% end %>
+  <%= render 'posts_list.html.erb' %>
+
+  <div id = "address">yo</div>
+
+  <div id = "post-form" style="display:none; ">
+    <% @post = current_user.posts.build if user_signed_in? %>
+    <%= form_for(@post) do |f| %>
+      <%= f.hidden_field :lat, id: "lat_field", value: 0.0 %>
+      <%= f.hidden_field :lng, id: "lng_field", value: 0.0 %>
+      <%= f.hidden_field :parent_post_id, value: 0 %>
+      <%= f.text_area :content, rows: 2, cols: 80, :maxlength => 140, :onkeyup => "check_char_count(this);",
+                      placeholder: "Compose new post..." %>
+      <p style = "" id = "characterLeft">140 characters left</p>
+
+      <%= f.submit "Post", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+</div>
+<div id = "right_half">
+  <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+  <div id="map"></div>
+</div>
+
+
+<%=  render 'search_functions.js.erb' %>
+

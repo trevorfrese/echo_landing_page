@@ -1,0 +1,20 @@
+<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+
+<div class = "overlay"></div>
+<div class ="backup_static_image"></div>
+<%= video_tag "isla_vista.mp4", id: "isla_vista", muted: true, loop: true, autoplay: true %>
+
+
+<div class ="centered_title">
+  Echo
+</div>
+<div class ="centered_subtitle">
+  Say something to a house, a block, or all of Isla Vista.
+</div>
+<div class = "login_buttons_container">
+  <%= link_to image_tag("sign-in-with-facebook.png", class:"login_button"), user_omniauth_authorize_path(:facebook)%>
+  <%= link_to image_tag("sign-in-with-google.png", class:"login_button"),   user_omniauth_authorize_path(:google_oauth2) %>
+</div>
+
+

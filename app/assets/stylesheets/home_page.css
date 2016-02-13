@@ -1,0 +1,16 @@
+.login_buttons_container{
+    position:relative;
+    top: 33%;
+    left: 50%;
+    text-align:center;
+    padding-left: 10%;
+    padding-right: 10%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.login_button{
+    width:200px;
+}

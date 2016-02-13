@@ -1,0 +1,16 @@
+<div class="col-md-8">
+    <h3><%= current_user.posts.count %> Echoes from near you!</h3>
+    <ul id="post-<%= post.id %>" class="list-group">
+      <%= render @posts %>
+    </ul>
+</div>
+
+<% if user_signed_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="post_form">
+        <%= render 'post_form' %>
+      </section>
+    </aside>
+  </div>
+<% end %>

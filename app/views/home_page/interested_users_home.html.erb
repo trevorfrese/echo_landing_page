@@ -1,0 +1,33 @@
+<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+
+
+<div class ="backup_static_image">
+  <div class = "overlay"></div>
+
+
+  <div class ="centered_title">
+    Echo
+  </div>
+  <div class ="centered_subtitle">
+    We're putting Isla Vista on the map.
+  </div>
+  <div class = "interested">
+    <p class = "interested_text">Sign up for our beta trial!</p>
+    <%= form_for @interested_user,  html: {:class => "form-inline centered_form"}, url: url_for(:controller=>"interested_users", :action => "sign_up") do |f| %>
+        <%= f.label :email, class: "form-control form-group" %>:
+        <%= f.email_field :email, class: "form-control" %>
+        <br>
+        <br>
+        <%= f.submit "I'm interested", class: "form-control btn btn-primary" %>
+    <% end %>
+  </div>
+
+</div>
+
+
+
+
+
+
+

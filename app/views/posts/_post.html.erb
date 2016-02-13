@@ -1,0 +1,30 @@
+<li class="list-group-item" id = "post-<%= post.id %>" >
+  <h4 class="list-group-item-heading"><%= post.content %></h4>
+  <%= link_to "Upvote!", controller: :map, action: :upvote, id: post.id %>
+  <span class="badge"><%= post.upvoted_users.count %></span>
+  <p class="list-group-item-text"><%= post.user.first_name %></p>
+  <p class="list-group-item-text">
+    Posted <%= time_ago_in_words(post.created_at) %> ago.
+  </p>
+
+  <div id = "reply-form" >
+  <% @post = current_user.posts.build if user_signed_in? %>
+  <%= form_for(@post) do |f| %>
+    <%= f.hidden_field :parent_post_id, value: post.id %>
+    <%= f.hidden_field :reply_post, value: true %>
+    <%= f.text_area :content, rows: 2, cols: 40, :maxlength => 140, :onkeyup => "check_char_count(this);",
+                    placeholder: "Compose new reply..." %>
+    <p style = "" id = "characterLeft">140 characters left</p>
+
+    <%= f.submit "Reply", class: "btn btn-primary" %>
+  <% end %>
+  </div>
+  <% if post.new_replies > 0 %>
+    <%= "You have "  + post.new_replies.to_s + " new replies" %>
+  <% end %>
+
+ <%= link_to "View Replies", '#', onclick: "$('#replies-list'+ #{post.id} ).slideToggle(); #{post.decrement!(:new_replies) if post.new_replies > 0}" if Post.all.any? {|p| p.parent_post_id == post.id } %>
+  <ul id = "replies-list<%= post.id %>" class="list-group" style="display:none;">
+    <%= render Post.all.select{ |child_post| child_post.parent_post_id == post.id} %>
+  </ul>
+</li>

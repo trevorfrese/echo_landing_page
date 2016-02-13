@@ -13,7 +13,7 @@
     We're putting Isla Vista on the map.
   </div>
   <div class = "interested">
-    <p class = "interested_text">Sign up for our beta trial!</p>
+    <p class = "interested_text">Want to be an alpha tester?</p>
     <%= form_for @interested_user,  html: {:class => "form-inline centered_form"}, url: url_for(:controller=>"interested_users", :action => "sign_up") do |f| %>
         <%= f.label :email, class: "form-control form-group" %>:
         <%= f.email_field :email, class: "form-control" %>

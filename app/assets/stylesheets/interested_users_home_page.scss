@@ -59,7 +59,18 @@ html, body{
   width: 100%;
   z-index:-1;
 }
-
+.title{
+  font-family: 'Pacifico', sans-serif;
+  font-size: 6vw;
+  text-align:left;
+  color: white;
+}
+.subtitle{
+  font-family: 'Oxygen', sans-serif;
+  font-size: 3vw;
+  text-align:left;
+  color: white;
+}
 /*===Titles===*/
 .centered_title {
   font-family: 'Pacifico', sans-serif;
@@ -94,13 +105,11 @@ html, body{
   -o-transform: translate(-50%, -50%);
 }
 .interested{
-  position:relative;
-  top: 30%;
-  text-align:center;
+
 }
 .interested_text{
   font-family: 'Oxygen', sans-serif;
-  font-size: 2vw;
+  font-size: 3vw;
   color: white;
 }
 

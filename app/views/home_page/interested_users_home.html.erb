@@ -13,36 +13,80 @@
   <div class = "overlay"></div>
 
   <row>
-    <div class="col-xs-6 col-md-4 marketing-container">
+    <div class="col-xs-6 col-md-4 iphone_image marketing-container">
       <%= image_tag("edited_phone.png", width: 375)%>
     </div>
-    <div class="col-sm-4 col-md-8 marketing-container">
+    <div class="col-sm-4 col-md-8 text_and_info marketing-container">
       <div class="title">
         Echo
       </div>
       <div class ="subtitle">
         We're putting Isla Vista on the map.
       </div>
-      <div class = "interested">
+      <div class="subtitle mobile_note">
+        Please view on a laptop for more information.
+      </div>
+      <!--<div class="padding_for_row">-->
+        <!--<%= image_tag("app_store.png", width: 200) %>-->
+        <!--<%= image_tag("google_play.png", width: 168) %>-->
+      <!--</div>-->
+
+      <div class = "interested padding_for_row">
         <p class = "interested_text">Want to be an alpha tester?</p>
         <%= form_for @interested_user,  html: {:class => "form-inline centered_form"}, url: url_for(:controller=>"interested_users", :action => "sign_up") do |f| %>
             <%= f.label :email, class: "form-control form-group" %>:
             <%= f.email_field :email, class: "form-control" %>
             <br>
             <br>
-            <%= f.submit "I'm interested", class: "form-control btn btn-primary" %>
+            <%= f.submit "Sign me up!", class: "form-control btn btn-primary" %>
         <% end %>
       </div>
     </div>
   </row>
-
-
-
 </div>
 
+<div class="how_to_use_app container marketing">
+  <div class="row">
+    <div class="col-lg-4">
+      <h1 class="marketing-title">Snap it</h1>
+      <%= image_tag('snap_it.png', width: 225, height: 350, class: "marketing_image") %>
+    </div>
+    <div class="col-lg-4">
+      <h1 class="marketing-title">Pin it</h1>
+      <%= image_tag('pin_it.png', width: 225, height: 350, class: "marketing_image") %>
+    </div>
+    <div class="col-lg-4">
+      <h1 class="marketing-title">Share it</h1>
+      <%= image_tag('share_it.png', width: 225, height: 350, class: "marketing_image") %>
+    </div>
+  </div>
+  <!--<div class="row">-->
+    <!--<h1 class="marketing-title">-->
+      <!--Some quote-->
+    <!--</h1>-->
+  <!--</div>-->
+</div>
+<!--<div class ="holding_image">-->
+  <!--<div class = "overlay"></div>-->
+<!--</div>-->
 
+<hr class="featurette-divider">
+<div style="margin: 0; margin-bottom: 20px;" class="row featurette">
+  <div class="col-md-7">
+    <h1 class="featurette-heading"> See posts from around you.</h1>
+    <p class="lead">With Echo you can share your favorite memories with a house, a street, or all of Isla Vista.
+      Now you can follow places the same way that you follow people, so that you can get updates from your favorite
+      beach, coffee shop, or even your friend's house.
+    </p>
+  </div>
+  <div class="col-md-5">
+    <%= image_tag('holding_phone.jpg', class: "featurette-image img-responsive center-block") %>
+  </div>
+</div>
 
-
+<div class ="closing_photo">
+  <div class = "overlay"></div>
+</div>
 
 
 

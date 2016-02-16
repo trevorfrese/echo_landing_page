@@ -12,6 +12,8 @@ body{
 html, body{
   height:100%;
   width:100%;
+  background-color: #F7FEFB;
+
 }
 
 /* VIDEO */
@@ -49,6 +51,27 @@ html, body{
   top:0;
   z-index: 1;
 }
+.closing_photo{
+  background: image-url("dp_cliff.jpg") no-repeat fixed;
+  width: 100%;
+  height: 660px;
+  padding-left: 0;
+  padding-right: 0;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  min-height: 100%;
+  min-width: 100%;
+  box-sizing: content-box;
+  position:relative;
+  left:0;
+  top:0;
+  z-index: 1;
+}
+
 /*===Images===*/
 .overlay{
   opacity: .37;
@@ -104,9 +127,7 @@ html, body{
   -moz-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
 }
-.interested{
 
-}
 .marketing-container{
   margin-top: 5%;
 }
@@ -116,6 +137,36 @@ html, body{
   color: white;
 }
 
+.padding_for_row{
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+.mobile_note{
+  display: none;
+}
+
+.container{
+  background-color: #F7FEFB;
+}
+.marketing{
+  background-color: #F7FEFB;
+}
+.col-lg-4{
+  text-align: center;
+}
+.marketing-title{
+  text-align: center;
+  margin-bottom: 25px;
+}
+.marketing_image{
+  outline: 10px solid #28459D;
+}
+.row{
+  margin-bottom:25px;
+}
+.featurette-heading{
+  margin-top: 120px;
+}
 /* Mobile support */
 
 @media screen and (max-device-width: 800px) {
@@ -139,17 +190,33 @@ html, body{
     top:0;
     z-index: 1;  }
 
-  #isla_vista {
-    display: none;
-  }
 
-  .centered_title {
-    font-size: 9em;
+  .iphone_image{
+    display:none;
   }
-
+  .title{
+    text-align: center;
+    font-size: 17vw;
+  }
+  .subtitle{
+    text-align: center;
+    font-size: 9vw;
+  }
+  .interested{
+    text_align: center;
+  }
   .centered_subtitle {
     font-size: 4vw;
 
+  }
+  .text_and_info{
+    margin-top: 200px;
+    width:100% !important;
+  }
+  .mobile_note{
+  }
+  .interested{
+    display:none;
   }
   .interested_text{
     font-family: 'Oxygen', sans-serif;
